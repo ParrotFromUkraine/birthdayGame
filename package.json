@@ -1,0 +1,16 @@
+{
+  "name": "telegram-bot",
+  "version": "Alpha",
+  "main": "regestartion.js",
+  "scripts": {
+    "reg": "node regestartion.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "ParrotFromUkraine | PFU",
+  "license": "ISC",
+  "description": "Тут просто будет бот в которому будет происходить квест на день рождения",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
