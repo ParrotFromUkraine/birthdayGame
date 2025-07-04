@@ -12,7 +12,7 @@ const quest = {
   },
 
   starting: {
-    text: "Ну так приступаем к игре!) Для начала тебе нужно ответь на пару вопросов!\n\n1. На какую должность готовится поступань?",
+    text: "Ну так приступаем к игре!) Для начала тебе нужно ответь на пару вопросов!\n\nНа какую должность готовится поступань?",
     options: [
       { text: "Програмист", next: "startingError" },
       { text: "Frontend", next: "startingCorrect" },
@@ -38,9 +38,9 @@ const quest = {
   },
 
   firstQustion: {
-    text: "2. 01001101 01111001 00100000 01101100 01101111 01110110 01100101 00100000 01101001 01110011 00100000 01001011 01101001 01110010 01100001 00100000 01001100 01111001 01101110 01101110 01111001 01101011))",
+    text: "01001101 01111001 00100000 01101100 01101111 01110110 01100101 00100000 01101001 01110011 00100000 01001011 01101001 01110010 01100001 00100000 01001100 01111001 01101110 01101110 01111001 01101011))",
     options: [
-      { text: "ILoveU", next: "" },
+      { text: "ILoveU", next: "secondQustion" },
       { text: "KiraMyWife", next: "" },
       { text: "01000110  01010101 01000011 01001011  01011001 01001111 01010101 00100001", next: 'fuckU'}
     ]
@@ -70,6 +70,35 @@ const quest = {
     ]
   },
 
+  secondQustion: {
+     text: 'Я люблю тебя моя милая!\n\nСпасибо что ты у меня есть!',
+     options: [
+      { text: "Давай к следуюшему вопросу", next:'skip'},
+      { text: 'И я люблю тебя', next: 'loveme'}
+     ]
+  },
+
+  loveme:{
+    text: ')))',
+    options: [
+      {text: ')))', next:'secondqust'}
+    ]
+  }, 
+
+  secondqust: {
+    text: '"0KfRgtC+INC/0L7Qv9GD0LPQsNC5INC70Y7QsdC40YIg0LHQvtC70YzRiNC1INCy0YHQtdCz0L4g0L3QsCDRgdCy0LXRgtC1Pw==" - UTF-8 LF(UNIX) base64decode.org',
+    options: [
+      {text: 'Бутерброд', next: 'uncorrect'},
+      {text: 'Speedcubing', next: 'uncorrect'},
+      {text: '0110101101101001011100100110000100100000011011000111100101101110011011100111100101101011', next: 'thertyqust'},
+      {text: '0KHQtdCx0Y8K', next: 'uncorrect'}
+    ]
+  },
+
+  thertyqust: {
+    text: 'OverWorld 404 0 404',
+  },
+
   // not correct answer
   error: {
     text: 'Давай просто закончим это все',
@@ -81,6 +110,13 @@ const quest = {
 
   stop: {
     text: 'Спасибо за то что ты зделала для меня, Это было все замечательно\n\nsudo rm -rf /',
+  }, 
+
+  uncorrect: {
+    text: 'Что-то пошло не так',
+    options: [
+      {text: 'Вернутся назад', next: 'secondqust'}
+    ]
   }
 };
 
@@ -114,3 +150,14 @@ function sendQuestStep(chatId, stepName) {
 
   bot.sendMessage(chatId, step.text, options);
 }
+
+bot.ontext('Спасибо Кеша', (msg) => {
+  const chatId = msg.chat.id
+  bot.sendMessage(chatId, '', {
+    reply_markup: { 
+      inline_keyboard: [
+        {text: '', url:''}
+      ]
+    }
+  })
+})
