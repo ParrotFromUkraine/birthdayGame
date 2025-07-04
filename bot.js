@@ -96,7 +96,7 @@ const quest = {
   },
 
   thertyqust: {
-    text: 'OverWorld 404 0 404',
+    text: 'Верхний Мир - 404 0 404',
   },
 
   // not correct answer
@@ -151,7 +151,7 @@ function sendQuestStep(chatId, stepName) {
   bot.sendMessage(chatId, step.text, options);
 }
 
-bot.ontext('Спасибо Кеша', (msg) => {
+bot.ontext('Первая', (msg) => {
   const chatId = msg.chat.id
   bot.sendMessage(chatId, '', {
     reply_markup: { 

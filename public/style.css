@@ -1,0 +1,39 @@
+body {
+    background: #181818;
+    color: #00ff00;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    margin: 0;
+    padding: 0;
+}
+.story-hint {
+    background: #222;
+    color: #fff;
+    padding: 16px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #00ff00;
+    text-align: center;
+}
+.terminal {
+    background: #181818;
+    padding: 24px;
+    min-height: 60vh;
+    max-width: 700px;
+    margin: 40px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 16px #000;
+    font-size: 1.1em;
+}
+.terminal-output {
+    min-height: 200px;
+    margin-bottom: 12px;
+    white-space: pre-wrap;
+}
+.terminal-input {
+    width: 100%;
+    background: #222;
+    color: #00ff00;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    outline: none;
+}
