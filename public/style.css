@@ -1,56 +1,57 @@
 body {
-    background: #181818;
-    color: #ffffff;
-    font-family: 'Fira Mono', 'Consolas', monospace;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  background: #181818;
+  color: #ffffff;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .story-hint {
-    background: #222;
-    color: #fff;
-    padding: 16px;
-    font-size: 1.2em;
-    border-bottom: 2px solid #ffffff;
-    text-align: center;
+  background: #222;
+  color: #fff;
+  padding: 16px;
+  font-size: 1.2em;
+  border-bottom: 2px solid #ffffff;
+  text-align: center;
 }
 
 .terminal-output {
-    flex: 1;
-    padding: 16px;
-    overflow-y: auto;
-    white-space: pre-wrap;
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 }
 
 .terminal-input {
-    width: 100%;
-    background: #222;
-    color: #ffffff;
-    border: none;
-    padding: 16px;
-    font-size: 1em;
-    outline: none;
-    box-sizing: border-box;
-    position: sticky;
-    bottom: 0;
+  width: 100%;
+  background: #222;
+  color: #ffffff;
+  border: none;
+  padding: 16px;
+  font-size: 1em;
+  outline: none;
+  box-sizing: border-box;
+  position: sticky;
+  bottom: 0;
 }
 
 /* Чёрный экран */
 #blackScreen {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    color: white;
-    font-size: 2em;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 9999;
-    transition: opacity 1s ease;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  color: white;
+  font-size: 2em;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  transition: opacity 1s ease;
 }
