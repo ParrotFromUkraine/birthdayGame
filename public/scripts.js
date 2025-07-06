@@ -1,17 +1,68 @@
+const present = {
+  mafin: '',
+  limon: '',
+  parrot: '',
+  yamma: '',
+  toniked: '',
+}
+
 const storySteps = [
-  { hint: "Ваша задача: открыть дверь. Введите команду: open door", answer: "open door", response: "Дверь открыта. Вы вошли в комнату." },
-  { hint: "Теперь найдите ключ. Введите команду: search key", answer: "search key", response: "Вы нашли ключ!" },
-  { hint: "Используйте ключ, чтобы открыть сундук. Введите команду: use key", answer: "use key", response: "Сундук открыт. Поздравляем!" }
-  // Нада добавить дополения
-
-];
-
+  {
+    id: 'start',
+    hint: "Здравствуйте, как вас зовут?",
+    branches: [
+      { answer: "Kira", next: 'login', response: "Здравствуйте, Кира. Вам нужно войти в систему." }
+    ]
+  },
+  {
+    id: 'login',
+    hint: "Введите email: (parootSystem.email == <ukrGmail>)",
+    branches: [
+      { answer: "parootSystem.email == kiralynnykmylove@gmail.com", next: 'password', response: "Успешно!" }
+    ]
+  },
+  {
+    id: 'password',
+    hint: "Введите password: (parootSystem.password == <password>)",
+    branches: [
+      { answer: "parootSystem.password == sudoLoveMe", next: 'task', response: "Успешно!\n\nKira joined to console" }
+    ]
+  },
+  {
+    id: 'task',
+    hint: 'Ваша задача: Починить бота. Для начала найдите его!',
+    branches: [
+      { answer: "folderList", next: 'folderList' }
+    ]
+  },
+  {
+    id: 'folderList',
+    response: 'kiraLynnyk/    telegrambot/    root/',
+    branches: [
+      { answer: 'open kiraLynnyk', next: 'kiraLynnykFolder' },
+      { answer: 'open telegramBot', },
+      { answer: 'open root', response: 'В доступе отказано' }
+    ]
+  },
+  {
+    id: 'kiraLynnyk',
+    response: 'https://t.me/SnrKesha'
+  },
+  {
+    id: 'telegramBotFolder',
+    hint: 'Вы в папке Телеграм бота',
+  }
+];;
 
 const easterEggs = [
   { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Обернувшись вы видете как вас ласково обнимает попугайчик)))" },
   { trigger: "sudo rm sandwich", response: "Вы удалили всё что связоно с сендвичами. Теперь попугай не сможет кушать бутерброды..." },
   { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
-  { trigger: "bro?", response: "Твоего бро тут нету..." }
+  { trigger: "mafin", response: present.mafin },
+  { trigger: "yamma", response: present.yamma },
+  { trigger: "parrot", response: present.parrot },
+  { trigger: 'limon', response: present.limon },
+  { trigger: 'toniked', response: present.toniked }
 ];
 
 let currentStep = 0;

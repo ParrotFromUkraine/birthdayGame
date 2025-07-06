@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "Тут просто будет бот в которому будет происходить квест на день рождения",
   "dependencies": {
+    "express": "^5.1.0",
     "node-telegram-bot-api": "^0.66.0"
   }
 }
