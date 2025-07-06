@@ -4,7 +4,8 @@
   "main": "regestartion.js",
   "scripts": {
     "reg": "node regestartion.js",
-    "start": "node index.js"
+    "start": "node bot.js",
+    "site": "node server.js"
   },
   "keywords": [],
   "author": "ParrotFromUkraine | PFU",
