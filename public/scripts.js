@@ -43,14 +43,16 @@ const storySteps = [
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
       { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha' },
-      { answer: 'open telegrambot', next: 'telegramBotFolder' },
+      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    package-lock.json   ' },
       { answer: 'open root', response: 'В доступе отказано' }
     ]
   },
   {
     id: 'telegramBotFolder',
     hint: 'Вы в папке Телеграм бота',
-    branches: []
+    branches: [
+
+    ]
   }
 ];
 
