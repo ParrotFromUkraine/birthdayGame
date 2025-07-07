@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const present = {
   mafin: '',
   limon: '',
@@ -37,17 +39,13 @@ const storySteps = [
   },
   {
     id: 'folderList',
+    hint: '',
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
-      { answer: 'open kiralynnyk', next: 'kiraLynnyk' },
+      { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha' },
       { answer: 'open telegrambot', next: 'telegramBotFolder' },
       { answer: 'open root', response: 'В доступе отказано' }
     ]
-  },
-  {
-    id: 'kiraLynnyk',
-    response: 'https://t.me/SnrKesha',
-    branches: []
   },
   {
     id: 'telegramBotFolder',
