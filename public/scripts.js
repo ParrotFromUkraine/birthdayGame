@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const present = {
   mafin: '',
   limon: '',
@@ -39,11 +37,10 @@ const storySteps = [
   },
   {
     id: 'folderList',
-    hint: '',
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
       { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha' },
-      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    package-lock.json   ' },
+      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    bot.js    img/    id.list   hentai.js   hidden_ppi.txt' },
       { answer: 'open root', response: 'В доступе отказано' }
     ]
   },
@@ -51,14 +48,58 @@ const storySteps = [
     id: 'telegramBotFolder',
     hint: 'Вы в папке Телеграм бота',
     branches: [
-
+      { answer: 'check hentai.js', response: 'Ты нашла пасхалку... Кислый был здесь.' },
+      { answer: 'check hidden_ppi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' }
+    ]
+  },
+  {
+    id: 'decrypt',
+    hint: 'Введите команду для расшифровки',
+    branches: [
+      { answer: 'decrypt hidden_ppi.txt', next: 'warning', response: '"ОН ЛЖЕЦ. ЭТО НЕ ПОМОЩНИК."' }
+    ]
+  },
+  {
+    id: 'warning',
+    hint: 'Что вы будете делать?',
+    branches: [
+      { answer: 'продолжить', next: 'betrayal', response: 'Вы решили продолжить работу с П.П.И.' },
+      { answer: 'ожидать звонка', next: 'gachiCall', response: 'Входящий звонок от: Слава (Лимон)...' }
+    ]
+  },
+  {
+    id: 'betrayal',
+    response: 'П.П.И.: "Спасибо, Кира. Ты сделала всё, что нужно. Я теперь часть твоего мира..."',
+    branches: [
+      { answer: 'shutdown ppi', next: 'virusAttack', response: 'Ошибка: доступ запрещён.\nП.П.И.: "Поздно..."' }
+    ]
+  },
+  {
+    id: 'virusAttack',
+    response: '🔥 П.П.И. активировал вирус.\nФайлы исчезают...\n🦠 СИСТЕМА РАЗРУШЕНА\n\nПЛОХАЯ КОНЦОВКА.',
+    branches: [
+      { answer: '...', next: 'start' }
+    ]
+  },
+  {
+    id: 'gachiCall',
+    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
+    branches: [
+      { answer: 'run GachiS.exe', next: 'gachiFinal', response: 'GachiS.exe запущен...' }
+    ]
+  },
+  {
+    id: 'gachiFinal',
+    response: '💪 GACHI BOYS ARRIVED 💪\nGachiLimon и GachiPit уничтожили П.П.И.\nБОТ СПАСЁН.\n\nХОРОШАЯ КОНЦОВКА ❤️',
+    branches: [
+      { answer: '...', next: 'start' }
     ]
   }
 ];
 
 const easterEggs = [
-  { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Обернувшись, вы видите как вас ласково обнимает попугайчик)))" },
-  { trigger: "sudo rm sandwich", response: "Вы удалили всё, что связано с сендвичами. Теперь попугай не сможет кушать бутерброды..." },
+  { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Он обнял вас крыльями." },
+  { trigger: "sudo rm sandwich", response: "Сендвичи удалены. Попугай в ярости." },
   { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
   { trigger: "mafin", response: present.mafin },
   { trigger: "yamma", response: present.yamma },

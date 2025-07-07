@@ -6,9 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BG | BirthGame</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+
+  </style>
 </head>
 
 <body>
+  <button id="toggleHintsBtn">Подсказки</button>
+  <div id="hintsTab" style="display: none">
+    <h3>Подсказки</h3>
+    <ul>
+      <li><code>Kira</code> — имя пользователя</li>
+      <li><code>parootsystem.email == kiralynnykmylove@gmail.com</code></li>
+      <li><code>parootsystem.password == sudoloveme</code></li>
+      <li><code>folderlist</code> — список папок</li>
+      <li><code>open telegrambot</code> — открыть папку</li>
+      <li><code>check hidden_ppi.txt</code> — ключ к разгадке</li>
+      <li><code>run GachiS.exe</code> — хорошая концовка</li>
+    </ul>
+  </div>
+
   <div id="gameContainer">
     <div class="story-hint" id="storyHint">Введите команду, чтобы начать игру...</div>
     <div class="terminal-output" id="terminalOutput"></div>
@@ -20,6 +37,20 @@
     <div id="loadingText">Удаление...</div>
   </div>
 
+  <script>
+    const toggleBtn = document.getElementById("toggleHintsBtn");
+    const hintsTab = document.getElementById("hintsTab");
+
+    toggleBtn.addEventListener("click", () => {
+      if (hintsTab.style.display === "none") {
+        hintsTab.style.display = "block";
+        toggleBtn.textContent = "Скрыть";
+      } else {
+        hintsTab.style.display = "none";
+        toggleBtn.textContent = "Подсказки";
+      }
+    });
+  </script>
   <script src="scripts.js"></script>
 </body>
 
