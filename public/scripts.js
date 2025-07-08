@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const present = {
   mafin: '',
   limon: '',
@@ -25,7 +27,7 @@ const storySteps = [
     id: 'password',
     hint: "Введите password: (parootSystem.password == <password>)",
     branches: [
-      { answer: "parootsystem.password == sudoloveme", next: 'task', response: "Успешно!\n\nKira joined to console" }
+      { answer: "parootsystem.password == sudoloveme", next: 'task', response: "Успешно!\n\nKira sign in" }
     ]
   },
   {
@@ -103,7 +105,7 @@ const easterEggs = [
   { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
   { trigger: "mafin", response: present.mafin },
   { trigger: "yamma", response: present.yamma },
-  { trigger: "parrot", response: present.parrot },
+  { trigger: "parrot", response: `Parrot sign in\n\p${present.parrot}\nТвой програмист из Украины\n\nParrot signout` },
   { trigger: 'limon', response: present.limon },
   { trigger: 'toniked', response: present.toniked }
 ];
