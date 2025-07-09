@@ -37,23 +37,45 @@ const storySteps = [
       { answer: "folderlist", next: 'folderList' }
     ]
   },
+
+  // --Next 
   {
     id: 'folderList',
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
-      { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha' },
-      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    bot.js    img/    id.list   hentai.js   hidden_ppi.txt' },
-      { answer: 'open root', response: 'В доступе отказано' }
+      { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha', next: 'folderlist' },
+      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    bot.js    img/    id.list   hidden_ppi.txt' },
+      { answer: 'open root', response: 'В доступе отказано', next: 'folderList' }
     ]
   },
   {
     id: 'telegramBotFolder',
     hint: 'Вы в папке Телеграм бота',
     branches: [
-      { answer: 'check hentai.js', response: 'Ты нашла пасхалку... Кислый был здесь.' },
-      { answer: 'check hidden_ppi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' }
+      { answer: 'check bot.js', response: '' },
+      { answer: 'check hidden_ppi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' },
+      { answer: 'check package.json', },
+      { answer: 'check id.list' },
+      { answer: 'open img/' }
     ]
   },
+
+  {
+    id: 'check bot.js',
+  },
+
+  {
+    id: 'check package.json',
+    response: 'Вам тут не следует нечего менять\nВы вернулись назад',
+    next: 'telegramBotFolder'
+  },
+
+  {
+    id: 'check id.list',
+    response: 'id list\n(Телефоний контакт)\n\n',
+    next: 'telegramBotFolder'
+  },
+
   {
     id: 'decrypt',
     hint: 'Введите команду для расшифровки',
