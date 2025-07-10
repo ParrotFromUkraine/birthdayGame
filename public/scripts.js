@@ -6,6 +6,7 @@ const present = {
   parrot: '',
   yamma: '',
   toniked: '',
+  luka: ''
 };
 
 const storySteps = [
@@ -55,13 +56,17 @@ const storySteps = [
       { answer: 'check bot.js', response: '' },
       { answer: 'check hidden_ppi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' },
       { answer: 'check package.json', },
-      { answer: 'check id.list' },
+      { answer: 'check id.list', cheac },
       { answer: 'open img/' }
     ]
   },
 
   {
     id: 'check bot.js',
+  },
+
+  {
+    id: 'pipi starting',
   },
 
   {
