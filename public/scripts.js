@@ -1,12 +1,14 @@
 const { response } = require("express");
 
 const present = {
-  mafin: '',
+  mafin: 'З днем народження Кіра, бажаю тобі щастя, здоровʼя, успіхів в житті . Хочу щоб в цей день у тебе була тільки посмішка та радість на обличчі 🥳🥳🥳',
   limon: '',
   parrot: '',
   yamma: '',
   toniked: '',
-  luka: ''
+  luka: 'Письмо кира привет я  лука я очень думал и вспомнил утебя день раждения ! паздравляю тебя кира - @luka',
+  stalker : ' ',
+  katana_lk: 'Головой по чаще думай... больше нечего сказать...', // Дословная цитата
 };
 
 const storySteps = [
@@ -45,85 +47,79 @@ const storySteps = [
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
       { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha', next: 'folderlist' },
-      { answer: 'open telegrambot', next: 'telegramBotFolder', response: 'package.json    bot.js    img/    id.list   hidden_ppi.txt' },
+      { answer: 'open telegrambot', next: 'telegramBotFolder',},
       { answer: 'open root', response: 'В доступе отказано', next: 'folderList' }
     ]
   },
   {
     id: 'telegramBotFolder',
+    response: 'bot.js hidden_pipi',
     hint: 'Вы в папке Телеграм бота',
     branches: [
-      { answer: 'check bot.js', response: '' },
-      { answer: 'check hidden_ppi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' },
-      { answer: 'check package.json', },
-      { answer: 'check id.list', cheac },
-      { answer: 'open img/' }
+      { answer: 'check bot.js', response: '', next: 'check bot.js' }, 
+      { answer: 'check hidden_pipi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' },
+      { answer: 'check package.json', }, // done
+      { answer: 'check id.list', cheac }, // next
+      {}
     ]
   },
 
   {
     id: 'check bot.js',
+    response: 'Хотите ли вы чтоб вам помогала нейронка???',
+    branches: [
+      { answer: 'yes',  next: 'pipi starting' },
+      { answer: 'no', next: '' }
+    ]
   },
 
   {
-    id: 'pipi starting',
+  id: 'pipi starting',
+  response: 'Зря...',
   },
 
-  {
-    id: 'check package.json',
-    response: 'Вам тут не следует нечего менять\nВы вернулись назад',
-    next: 'telegramBotFolder'
-  },
+{
+  id: 'check package.json',
+  response: 'Вам тут не следует нечего менять\nВы вернулись назад',
+  next: 'telegramBotFolder'
+},
 
-  {
-    id: 'check id.list',
+{
+  id: 'check id.list',
     response: 'id list\n(Телефоний контакт)\n\n',
-    next: 'telegramBotFolder'
-  },
+      next: 'telegramBotFolder'
+},
 
-  {
-    id: 'decrypt',
+{
+  id: 'decrypt',
     hint: 'Введите команду для расшифровки',
-    branches: [
-      { answer: 'decrypt hidden_ppi.txt', next: 'warning', response: '"ОН ЛЖЕЦ. ЭТО НЕ ПОМОЩНИК."' }
-    ]
-  },
-  {
-    id: 'warning',
-    hint: 'Что вы будете делать?',
-    branches: [
-      { answer: 'продолжить', next: 'betrayal', response: 'Вы решили продолжить работу с П.П.И.' },
-      { answer: 'ожидать звонка', next: 'gachiCall', response: 'Входящий звонок от: Слава (Лимон)...' }
-    ]
-  },
-  {
-    id: 'betrayal',
-    response: 'П.П.И.: "Спасибо, Кира. Ты сделала всё, что нужно. Я теперь часть твоего мира..."',
-    branches: [
-      { answer: 'shutdown ppi', next: 'virusAttack', response: 'Ошибка: доступ запрещён.\nП.П.И.: "Поздно..."' }
-    ]
-  },
-  {
-    id: 'virusAttack',
-    response: '🔥 П.П.И. активировал вирус.\nФайлы исчезают...\n🦠 СИСТЕМА РАЗРУШЕНА\n\nПЛОХАЯ КОНЦОВКА.',
-    branches: [
-      { answer: '...', next: 'start' }
-    ]
-  },
-  {
-    id: 'gachiCall',
-    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
-    branches: [
-      { answer: 'run GachiS.exe', next: 'gachiFinal', response: 'GachiS.exe запущен...' }
-    ]
-  },
-  {
-    id: 'gachiFinal',
-    response: '💪 GACHI BOYS ARRIVED 💪\nGachiLimon и GachiPit уничтожили П.П.И.\nБОТ СПАСЁН.\n\nХОРОШАЯ КОНЦОВКА ❤️',
-    branches: [
-      { answer: '...', next: 'start' }
-    ]
-  }
+      branches: [
+        { answer: 'decrypt hidden_pipi.txt', next: 'warning', response: '"ОН ЛЖЕЦ. ЭТО НЕ ПОМОЩНИК."' }
+      ]
+},
+{
+  id: 'warning',
+  hint: 'Вы должны узнать кто-то такой (1697965694) и написать его @username сюда (В этом поможет @myidbot',
+  branches: [
+    {answer: '@r0st1sIav_999', next: 'secondRound'}
+  ]
+},
+
+
+//{
+//  id: 'gachiCall',
+//    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
+//      branches: [
+//        { answer: 'run GachiS.exe', next: 'gachiFinal', response: 'GachiS.exe запущен...' }
+//      ]
+//},
+//{
+//id: 'gachiFinal',
+//  response: '💪 GACHI BOYS ARRIVED 💪\nGachiLimon и GachiPit уничтожили П.И.П.И.\nБОТ СПАСЁН.\n\nХОРОШАЯ КОНЦОВКА ❤️',
+//     branches: [
+//       { answer: '...', next: 'start' }
+//    ]
+//}
 ];
 
 const easterEggs = [
@@ -134,7 +130,8 @@ const easterEggs = [
   { trigger: "yamma", response: present.yamma },
   { trigger: "parrot", response: `Parrot sign in\n\p${present.parrot}\nТвой програмист из Украины\n\nParrot signout` },
   { trigger: 'limon', response: present.limon },
-  { trigger: 'toniked', response: present.toniked }
+  { trigger: 'toniked', response: present.toniked },
+  { trigger: 'stalker', response: present.stalker }
 ];
 
 let currentStepId = 'start';
