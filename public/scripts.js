@@ -7,7 +7,7 @@ const present = {
   yamma: '',
   toniked: '',
   luka: 'Письмо кира привет я  лука я очень думал и вспомнил утебя день раждения ! паздравляю тебя кира - @luka',
-  stalker : ' ',
+  stalker: ' ',
   katana_lk: 'Головой по чаще думай... больше нечего сказать...', // Дословная цитата
 };
 
@@ -47,20 +47,18 @@ const storySteps = [
     response: 'kiraLynnyk/    telegrambot/    root/',
     branches: [
       { answer: 'open kiraLynnyk', response: 'https://t.me/SnrKesha', next: 'folderlist' },
-      { answer: 'open telegrambot', next: 'telegramBotFolder',},
+      { answer: 'open telegrambot', next: 'telegramBotFolder', },
       { answer: 'open root', response: 'В доступе отказано', next: 'folderList' }
     ]
   },
   {
     id: 'telegramBotFolder',
-    response: 'bot.js hidden_pipi',
+    response: 'bot.js   hidden_pipi   package.json',
     hint: 'Вы в папке Телеграм бота',
     branches: [
-      { answer: 'check bot.js', response: '', next: 'check bot.js' }, 
+      { answer: 'check bot.js', response: '', next: 'check bot.js' },
       { answer: 'check hidden_pipi.txt', next: 'decrypt', response: 'Файл зашифрован. Расшифровать?' },
-      { answer: 'check package.json', }, // done
-      { answer: 'check id.list', cheac }, // next
-      {}
+      { answer: 'check package.json', } // done
     ]
   },
 
@@ -68,58 +66,60 @@ const storySteps = [
     id: 'check bot.js',
     response: 'Хотите ли вы чтоб вам помогала нейронка???',
     branches: [
-      { answer: 'yes',  next: 'pipi starting' },
-      { answer: 'no', next: '' }
+      { answer: 'yes', next: 'pipi starting' },
+      { answer: 'no', next: 'open ' }
     ]
   },
 
   {
-  id: 'pipi starting',
-  response: 'Зря...',
+    id: 'pipi starting',
+    response: 'Зря...',
+    next: ''
   },
 
-{
-  id: 'check package.json',
-  response: 'Вам тут не следует нечего менять\nВы вернулись назад',
-  next: 'telegramBotFolder'
-},
+  {
+    id: 'check package.json',
+    response: 'Вам тут не следует нечего менять\nВы вернулись назад',
+    next: 'telegramBotFolder'
+  },
 
-{
-  id: 'check id.list',
-    response: 'id list\n(Телефоний контакт)\n\n',
-      next: 'telegramBotFolder'
-},
-
-{
-  id: 'decrypt',
+  {
+    id: 'decrypt',
     hint: 'Введите команду для расшифровки',
-      branches: [
-        { answer: 'decrypt hidden_pipi.txt', next: 'warning', response: '"ОН ЛЖЕЦ. ЭТО НЕ ПОМОЩНИК."' }
-      ]
-},
-{
-  id: 'warning',
-  hint: 'Вы должны узнать кто-то такой (1697965694) и написать его @username сюда (В этом поможет @myidbot',
-  branches: [
-    {answer: '@r0st1sIav_999', next: 'secondRound'}
-  ]
-},
+    branches: [
+      { answer: 'decrypt hidden_pipi.txt', next: 'warning', response: '"ОН ЛЖЕЦ. ЭТО НЕ ПОМОЩНИК."' }
+    ]
+  },
+  {
+    id: 'warning',
+    hint: 'Вы должны узнать кто-то такой (1697965694) и написать его @username сюда (В этом поможет @myidbot',
+    branches: [
+      { answer: '@r0st1sIav_999', next: 'secondRound' }
+    ]
+  },
 
+  {
+    id: "secondRound",
+    hint: 'Вы должны узнать кто-то такой (1496894138) и написать его @username сюда (В этом поможет @myidbot',
+    branches: [
+      { answer: '' }
+    ]
+  }
 
-//{
-//  id: 'gachiCall',
-//    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
-//      branches: [
-//        { answer: 'run GachiS.exe', next: 'gachiFinal', response: 'GachiS.exe запущен...' }
-//      ]
-//},
-//{
-//id: 'gachiFinal',
-//  response: '💪 GACHI BOYS ARRIVED 💪\nGachiLimon и GachiPit уничтожили П.И.П.И.\nБОТ СПАСЁН.\n\nХОРОШАЯ КОНЦОВКА ❤️',
-//     branches: [
-//       { answer: '...', next: 'start' }
-//    ]
-//}
+  //{
+  //  id: 'gachiCall',
+  //    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
+  //      branches: [
+  //        { answer: 'run GachiS.exe', next: 'gachiFinal', response: 'GachiS.exe запущен...' }
+  //      ]
+  //},
+  //{
+  //id: 'gachiFinal',
+  //  response: '💪 GACHI BOYS ARRIVED 💪\nGachiLimon и GachiPit уничтожили П.И.П.И.\nБОТ СПАСЁН.\n\nХОРОШАЯ КОНЦОВКА ❤️',
+  //     branches: [
+  //       { answer: '...', next: 'start' }
+  //    ]
+  //}
 ];
 
 const easterEggs = [
