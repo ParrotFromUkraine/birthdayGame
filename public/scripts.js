@@ -125,15 +125,31 @@ const storySteps = [
     id: 'aftParrotFromUkraine',
     response: '18aug08+Steamid',
     branches: [
-      { answer: '' }
+      { answer: '', next: 'aftYamma' }
     ]
   },
 
   {
-    id: '',
-    response: '',
+    id: 'aftYamma',
+    response: 'Юбилей? d/m/y',
     branches: [
-      {}
+      { answer: '20/05/2025', next: 'aftDays' }
+    ]
+  },
+
+  {
+    id: "aftDays",
+    response: 'Первый подарок от Киры для попугая',
+    branches: [
+      { answer: 'Попугай', next: "aftParrot" }
+    ]
+  },
+
+  {
+    id: "aftParrot",
+    response: 'DevParrot...Forever',
+    branches: [
+      { answer: 'WithLove' }
     ]
   },
 
@@ -159,6 +175,7 @@ const storySteps = [
 ];
 
 const easterEggs = [
+  { trigger: 'sudo rm -rf /', triggerWipeSequence() }
   { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Он обнял вас крыльями." },
   { trigger: "sudo rm sandwich", response: "Сендвичи удалены. Попугай в ярости." },
   { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
