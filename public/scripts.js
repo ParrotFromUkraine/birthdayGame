@@ -1,5 +1,12 @@
 const { response } = require("express");
 
+const steamId = {
+  parrotFromUkraine: '',
+  yamma: '',
+  toniket: '',
+  ukraineAccount: ''
+}
+
 const present = {
   mafin: 'З днем народження Кіра, бажаю тобі щастя, здоровʼя, успіхів в житті . Хочу щоб в цей день у тебе була тільки посмішка та радість на обличчі 🥳🥳🥳',
   limon: '',
@@ -102,10 +109,39 @@ const storySteps = [
     id: "secondRound",
     hint: 'Вы должны узнать кто-то такой (1496894138) и написать его @username сюда (В этом поможет @myidbot',
     branches: [
+      { answer: "@ce09a", next: 'therthround' }
+    ]
+  },
+
+  {
+    id: 'therthround',
+    response: '240508-Steam',
+    branches: [
+      { answer: "ParrotFromUkraine", next: 'aftParrotFromUkraine' }
+    ]
+  },
+
+  {
+    id: 'aftParrotFromUkraine',
+    response: '18aug08+Steamid',
+    branches: [
       { answer: '' }
     ]
-  }
+  },
 
+  {
+    id: '',
+    response: '',
+    branches: [
+      {}
+    ]
+  },
+
+  {
+    id: 'uncrypt',
+    hint: 'Вы розвеяли все защиты. Вы находитесь у главного терминала нейросети П.И.П.И\n\nВ логах вы видете ',
+    response: "П.И.П.И - Что тут происходит?",
+  }
   //{
   //  id: 'gachiCall',
   //    response: '"Ик... Кира, я сделал антивирусник... GachiS.exe!"',
