@@ -174,8 +174,7 @@ const storySteps = [
   //}
 ];
 
-const easterEggs = [
-  { trigger: 'sudo rm -rf /', triggerWipeSequence() }
+const easterEggs = [ 
   { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Он обнял вас крыльями." },
   { trigger: "sudo rm sandwich", response: "Сендвичи удалены. Попугай в ярости." },
   { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
