@@ -119,113 +119,127 @@
     const storySteps = [
       {
         id: 'start',
-        hint: "Здравствуйте, как вас зовут?",
+        hint: "Привет, Кира! Твой день рождения начинается с магии! Логин?",
         branches: [
-          {answer: "Kira", next: 'login', response: "Здравствуйте, Кира. Вам нужно войти в систему."},
-          {answer: "Parrot", next: 'parrotSecret', response: "Привет, попугай! У тебя есть особый доступ."},
-          {answer: "help", response: "Введите ваше имя (например: Kira)", next: 'start'}
+          {answer: "Kira", next: 'portal', response: "О, Кира, это ты! Войди в магический портал, чтобы начать приключение!"},
+          {answer: "Parrot", next: 'parrotSecret', response: "Попугай? Ты знаешь секретный код!"},
+          {answer: "help", response: "Введи своё имя, например, 'Kira'.", next: 'start'}
         ]
       },
       {
-        id: 'login',
-        hint: "Введите email: (подсказка: содержит 'kiralynnykmylove')",
+        id: 'portal',
+        hint: "Перед тобой сияющий портал. Назови заклинание (подсказка: связано с 'magic' и 'kira')",
         branches: [
-          {answer: "kiralynnykmylove@gmail.com", next: 'password', response: "Email подтвержден!"},
-          {answer: "help", response: "Попробуйте: kiralynnykmylove@gmail.com", next: 'login'}
+          {answer: "magickira", next: 'enchantedKingdom', response: "Заклинание сработало! Портал переносит тебя в Зачарованное Королевство!"},
+          {answer: "help", response: "Попробуй соединить 'magic' и твоё имя.", next: 'portal'}
         ]
       },
       {
-        id: 'password',
-        hint: "Введите пароль: (подсказка: связан с 'sudo' и 'love')",
+        id: 'enchantedKingdom',
+        hint: "Ты в Зачарованном Королевстве! Перед тобой три пути: [castle] [forest] [lake]. Куда отправишься?",
         branches: [
-          {answer: "sudoloveme", next: 'mainMenu', response: "Успешный вход!\n\nДобро пожаловать, Кира!"},
-          {answer: "help", response: "Попробуйте комбинацию из 'sudo' и 'love'", next: 'password'}
+          {answer: "castle", next: 'castleGate', response: "Ты подходишь к величественному замку, где хранятся тайны прошлого."},
+          {answer: "forest", next: 'forestPath', response: "Ты вступаешь в густой лес, полный магии и загадок."},
+          {answer: "lake", next: 'lakeShore', response: "Ты у озера, где вода шепчет мелодии твоего сердца."},
+          {answer: "help", response: "Выбери: castle, forest или lake.", next: 'enchantedKingdom'}
         ]
       },
       {
-        id: 'mainMenu',
-        hint: "Выберите действие: [friends] [gifts] [memories] [help]",
+        id: 'castleGate',
+        response: "Страж замка требует пароль. Назови слово, связанное с твоей мечтой.",
+        hint: "Введи слово (подсказка: что-то о мечтах):",
         branches: [
-          {answer: "friends", next: 'friendsList', response: "Открываю список друзей..."},
-          {answer: "gifts", next: 'giftsMenu', response: "Раздел подарков:"},
-          {answer: "memories", next: 'memoriesPuzzle', response: "Доступ к воспоминаниям требует решения загадки..."},
-          {answer: "help", response: "Доступные команды: friends, gifts, memories", next: 'mainMenu'}
+          {answer: "dream", next: 'castleHall', response: "Страж кивает: 'Верно!' Ты входишь в замок."},
+          {answer: "help", response: "Подумай о слове, связанном с мечтами, например, 'dream'.", next: 'castleGate'}
         ]
       },
       {
-        id: 'friendsList',
-        response: "Список друзей:\n1. @r0st1sIav_999 (ID: 1697965694)\n2. @ce09a (ID: 1496894138)\n3. ParrotFromUkraine\n4. Yamma",
-        hint: "Введите имя друга для просмотра деталей или [back] для возврата",
+        id: 'castleHall',
+        response: "В зале замка три сундука: [gold] [silver] [crystal]. Какой откроешь?",
+        hint: "Выбери сундук: [gold] [silver] [crystal]",
         branches: [
-          {answer: "@r0st1sIav_999", response: present.toniked, next: 'friendsList'},
-          {answer: "@ce09a", response: present.limon, next: 'friendsList'},
-          {answer: "ParrotFromUkraine", response: present.parrot, next: 'friendsList'},
-          {answer: "Yamma", response: present.yamma, next: 'friendsList'},
-          {answer: "back", next: 'mainMenu', response: "Возвращаемся..."}
+          {answer: "gold", next: 'goldChest', response: "Золотой сундук сияет ярко, как твоя улыбка!"},
+          {answer: "silver", next: 'silverChest', response: "Серебряный сундук хранит что-то нежное и тёплое."},
+          {answer: "crystal", next: 'crystalChest', response: "Кристальный сундук переливается, словно твои мечты!"},
+          {answer: "help", response: "Выбери: gold, silver или crystal.", next: 'castleHall'}
         ]
       },
       {
-        id: 'giftsMenu',
-        response: "Список подарков:\n1. Первый подарок для попугая\n2. Тайный подарок",
-        hint: "Выберите подарок (1-2) или [back]",
+        id: 'goldChest',
+        response: "В золотом сундуке: " + present.mafin + "\n\nХочешь продолжить искать сокровища?",
+        hint: "Продолжить? [yes/no]",
         branches: [
-          {answer: "1", next: 'firstGift', response: "Загрузка информации..."},
-          {answer: "2", next: 'secretGiftPuzzle', response: "Требуется разгадать загадку..."},
-          {answer: "back", next: 'mainMenu', response: "Возвращаемся..."}
+          {answer: "yes", next: 'castleHall', response: "Ты возвращаешься в зал замка."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь в замке..."}
         ]
       },
       {
-        id: 'firstGift',
-        response: "Первый подарок от Киры для попугая был...",
-        hint: "Введите название подарка:",
+        id: 'silverChest',
+        response: "В серебряном сундуке: " + present.yamma + "\n\nПродолжить приключение?",
+        hint: "Продолжить? [yes/no]",
         branches: [
-          {answer: "Попугай", next: 'giftConfirmed', response: "Верно! Это был плюшевый попугай!"},
-          {answer: "help", response: "Подсказка: это мягкая игрушка", next: 'firstGift'}
+          {answer: "yes", next: 'castleHall', response: "Ты возвращаешься в зал замка."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь в замке..."}
         ]
       },
       {
-        id: 'secretGiftPuzzle',
-        response: "Чтобы открыть тайный подарок, ответьте:\nДата знакомства (дд/мм/гггг)?",
+        id: 'crystalChest',
+        response: "В кристальном сундуке: " + present.secret + "\n\nХочешь продолжить?",
+        hint: "Продолжить? [yes/no]",
         branches: [
-          {answer: "20/05/2025", next: 'secretGift', response: "Правильно! Открываю тайный подарок..."},
-          {answer: "help", response: "Это важная дата в истории", next: 'secretGiftPuzzle'}
+          {answer: "yes", next: 'castleHall', response: "Ты возвращаешься в зал замка."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь в замке..."}
         ]
       },
       {
-        id: 'memoriesPuzzle',
-        response: "Введите Steam ID попугая:",
+        id: 'forestPath',
+        response: "В лесу ты находишь древнее древо. Какой лист ты выберешь?",
+        hint: "Введи тип листа (подсказка: подумай о природе):",
         branches: [
-          {answer: "240508", next: 'memoriesUnlocked', response: "Доступ разрешен! Загружаю воспоминания..."},
-          {answer: "help", response: "ID связан с важной датой", next: 'memoriesPuzzle'}
+          {answer: "oak", next: 'oakLeaf', response: "Дубовый лист шепчет о силе и стойкости!"},
+          {answer: "maple", next: 'mapleLeaf', response: "Кленовый лист сияет яркими красками!"},
+          {answer: "help", response: "Попробуй 'oak' или 'maple'.", next: 'forestPath'}
         ]
       },
       {
-        id: 'memoriesUnlocked',
-        response: "Самые теплые воспоминания:\n1. Первое знакомство\n2. Совместные проекты\n3. Музыкальные моменты",
-        hint: "Выберите воспоминание (1-3) или [back]",
+        id: 'oakLeaf',
+        response: "Дубовый лист открывает: " + present.toniked + "\n\nПродолжить путешествие?",
+        hint: "Продолжить? [yes/no]",
         branches: [
-          {answer: "1", response: "20 мая 2025 года - день, когда всё началось...", next: 'memoriesUnlocked'},
-          {answer: "2", response: "Создание ботов, игр и этот квест - наше творчество!", next: 'memoriesUnlocked'},
-          {answer: "3", response: "Твоя музыка вдохновляет меня каждый день!", next: 'memoriesUnlocked'},
-          {answer: "back", next: 'mainMenu', response: "Возвращаемся..."}
+          {answer: "yes", next: 'enchantedKingdom', response: "Ты возвращаешься к развилке в королевстве."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь в лесу..."}
         ]
       },
       {
-        id: 'secretGift',
-        response: present.secret + "\n\nЭтот квест был создан специально для тебя!",
-        next: 'happyEnding'
+        id: 'mapleLeaf',
+        response: "Кленовый лист дарит: " + present.luka + "\n\nПродолжить приключение?",
+        hint: "Продолжить? [yes/no]",
+        branches: [
+          {answer: "yes", next: 'enchantedKingdom', response: "Ты возвращаешься к развилке в королевстве."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь в лесу..."}
+        ]
       },
       {
-        id: 'giftConfirmed',
-        response: "Подарок подтвержден! Хотите продолжить? [yes/no]",
+        id: 'lakeShore',
+        response: "На берегу озера ты видишь отражение. Назови, что ты видишь:",
+        hint: "Введи, что видишь (подсказка: что-то музыкальное):",
         branches: [
-          {answer: "yes", next: 'mainMenu', response: "Возвращаемся в меню..."},
-          {answer: "no", next: 'happyEnding', response: "Завершение работы..."}
+          {answer: "melody", next: 'lakeMelody', response: "Отражение показывает мелодию, звучащую в твоём сердце!"},
+          {answer: "help", response: "Подумай о музыке, например, 'melody'.", next: 'lakeShore'}
+        ]
+      },
+      {
+        id: 'lakeMelody',
+        response: "Озеро поёт: " + present.parrot + "\n\nХочешь продолжить?",
+        hint: "Продолжить? [yes/no]",
+        branches: [
+          {answer: "yes", next: 'enchantedKingdom', response: "Ты возвращаешься к развилке в королевстве."},
+          {answer: "no", next: 'happyEnding', response: "Ты завершаешь путь у озера..."}
         ]
       },
       {
         id: 'happyEnding',
-        response: 'С Днём Рождения, Кирочка! 🎂\n\nЭтот квест был создан с любовью специально для тебя!\n\nТвой попугай. 🦜❤️',
+        response: 'С Днём Рождения, Кирочка! 🎂\n\nЭтот магический квест был создан с любовью для тебя!\nТвой попугай. 🦜❤️',
         next: 'restart'
       },
       {
@@ -237,14 +251,14 @@
         id: 'restart',
         response: 'Введите "restart" чтобы начать заново',
         branches: [
-          {answer: 'restart', next: 'start', response: 'Перезапуск системы...'}
+          {answer: 'restart', next: 'start', response: 'Перезапуск приключения...'}
         ]
       }
     ];
 
     const easterEggs = [
-      {trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Он обнял вас крыльями."},
-      {trigger: "sudo rm sandwich", response: "Сендвичи удалены.((("},
+      {trigger: "sudo love me baby", response: "Попугай обнимает тебя крыльями и шепчет: 'Ты волшебна!'"},
+      {trigger: "sudo rm sandwich", response: "Сендвичи исчезли в магическом вихре! 😢"},
       {trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..."},
       {trigger: "mafin", response: present.mafin},
       {trigger: "yamma", response: present.yamma},
@@ -275,16 +289,16 @@
 
     function updateHint() {
       const step = getStepById(currentStepId);
-      storyHint.textContent = step?.hint || "Игра завершена! Введите 'restart' чтобы начать заново.";
+      storyHint.textContent = step?.hint || "Приключение завершено! Введите 'restart' чтобы начать заново.";
     }
 
     function triggerWipeSequence() {
       gameContainer.style.display = 'none';
       blackScreen.style.display = 'flex';
-      loadingText.textContent = "Удаление всех файлов...";
+      loadingText.textContent = "Магия исчезает...";
 
-      setTimeout(() => loadingText.textContent = "Система разрушена...", 2000);
-      setTimeout(() => loadingText.textContent = "Перезагрузка...", 4000);
+      setTimeout(() => loadingText.textContent = "Мир растворяется...", 2000);
+      setTimeout(() => loadingText.textContent = "Перезагрузка магии...", 4000);
       setTimeout(() => loadingText.textContent = "Привет, Кира!", 6000);
 
       setTimeout(() => {
@@ -330,7 +344,7 @@
               updateHint();
             }
           } else {
-            terminalOutput.innerHTML += `<div>Неизвестная команда. Попробуйте еще раз.</div>`;
+            terminalOutput.innerHTML += `<div>Неизвестное заклинание. Попробуй ещё раз!</div>`;
           }
         }
 
