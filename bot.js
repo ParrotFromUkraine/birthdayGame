@@ -96,7 +96,7 @@ const quest = {
   },
 
   thertyqust: {
-    text: 'Верхний Мир - 404 0 404',
+    text: 'Верхний Мир - 404 404',
   },
 
   // not correct answer
