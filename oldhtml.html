@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kira's Birthday Adventure</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            width: 800px;
+            height: 600px;
+            border: 2px solid #0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #terminalOutput {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            height: 500px;
+        }
+        
+        #storyHint {
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #111;
+            border-left: 3px solid #0f0;
+        }
+        
+        #terminalInput {
+            background-color: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            outline: none;
+        }
+        
+        #blackScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #0f0;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 100;
+        }
+        
+        .easter-egg {
+            color: #ff0;
+            margin: 5px 0;
+        }
+        
+        #title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f0f;
+        }
+        
+        #credits {
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: right;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="title">Kira's Birthday Adventure</div>
+        <div id="storyHint"></div>
+        <div id="terminalOutput"></div>
+        <input type="text" id="terminalInput" autofocus>
+        <div id="credits">Created with ❤️ by ParrotFromUkraine</div>
+    </div>
+    
+    <div id="blackScreen">
+        <div id="loadingText"></div>
+    </div>
+
+    <script>
+        const steamId = {
+          parrotFromUkraine: '',
+          yamma: '',
+          toniket: '',
+          ukraineAccount: ''
+        };
+
+        const present = {
+          mafin: 'З днем народження Кіра, бажаю тобі щастя, здоровʼя, успіхів в житті . Хочу щоб в цей день у тебе була тільки посмішка та радість на обличчі 🥳🥳🥳',
+          limon: 'Тут должно было быть поздравелния((',
+          parrot: 'Кирочка))\nС днём рождения, солнышко!\nПусть в этот день всё вокруг сияет для тебя: улыбки, цветы, слова.\nТы — настоящее чудо, и я безумно рад, что ты есть в моей жизни.🥹\nЖелаю тебе счастья, вдохновения в музыке и волшебных моментов каждый день.\nТвой пернатый из Украины)))🦜❤️😘',
+          yamma: 'Тут должно было быть поздравления((',
+          toniked: 'Тут должно было быть поздравления((',
+          luka: 'Письмо кира привет я  лука я очень думал и вспомнил утебя день раждения ! паздравляю тебя кира - @luka',
+          stalker: 'Тут должно было быть поздравелния((',
+          katana_lk: 'Головой по чаще думай... больше нечего сказать...', // Дословная цитата
+          secret: 'Секретное поздравление: Ты самая лучшая Кирочка на свете! 💖'
+        }
+
+
+        const easterEggs = [
+          { trigger: "sudo love me baby", response: "Вы почувствовали присутствие попугая. Он обнял вас крыльями." },
+          { trigger: "sudo rm sandwich", response: "Сендвичи удалены. Попугай в ярости." },
+          { trigger: "42", response: "Ответ на главный вопрос жизни, вселенной и всего такого..." },
+          { trigger: "mafin", response: present.mafin },
+          { trigger: "yamma", response: present.yamma },
+          { trigger: "parrot", response: `Parrot sign in\n\n${present.parrot}\n\nТвой программист из Украины\n\nParrot sign out` },
+          { trigger: 'limon', response: present.limon },
+          { trigger: 'toniked', response: present.toniked },
+          { trigger: 'luka', response: present.luka },
+          { trigger: 'stalker', response: present.stalker },
+          { trigger: 'katana', response: present.katana_lk },
+          { trigger: 'secret', response: present.secret },
+          { trigger: 'happy birthday', response: 'С Днём Рождения, Кирочка! 🎂🎉' },
+          { trigger: 'i love you', response: 'Я тоже тебя люблю! ❤️' },
+          { trigger: 'popugai', response: '🦜 Кря! 🦜' }
+        ];
+
+        let currentStepId = 'start';
+
+        const storyHint = document.getElementById('storyHint');
+        const terminalOutput = document.getElementById('terminalOutput');
+        const terminalInput = document.getElementById('terminalInput');
+        const gameContainer = document.getElementById('gameContainer');
+        const blackScreen = document.getElementById('blackScreen');
+        const loadingText = document.getElementById('loadingText');
+
+        function getStepById(id) {
+          return storySteps.find(step => step.id === id);
+        }
+
+        function updateHint() {
+          const step = getStepById(currentStepId);
+          storyHint.textContent = step?.hint || "Игра завершена! Введите 'restart' чтобы начать заново.";
+        }
+
+        function triggerWipeSequence() {
+          gameContainer.style.display = 'none';
+          blackScreen.style.display = 'flex';
+          loadingText.textContent = "Удаление всех файлов...";
+
+          setTimeout(() => loadingText.textContent = "Система разрушена...", 2000);
+          setTimeout(() => loadingText.textContent = "Перезагрузка...", 4000);
+          setTimeout(() => loadingText.textContent = "Привет, Кира!", 6000);
+
+          setTimeout(() => {
+            terminalOutput.innerHTML = "";
+            currentStepId = 'start';
+            updateHint();
+            blackScreen.style.display = 'none';
+            gameContainer.style.display = 'block';
+            terminalInput.focus();
+          }, 8000);
+        }
+
+        function normalize(str) {
+          return str.toLowerCase().trim().replace(/\s+/g, ' ');
+        }
+
+        terminalInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            const userInput = terminalInput.value.trim();
+            terminalOutput.innerHTML += `<div>&gt; ${userInput}</div>`;
+
+            if (userInput === "sudo rm -rf /") {
+              triggerWipeSequence();
+              terminalInput.value = '';
+              return;
+            }
+
+            const egg = easterEggs.find(e => normalize(e.trigger) === normalize(userInput));
+            if (egg) {
+              terminalOutput.innerHTML += `<div class="easter-egg">${egg.response}</div>`;
+            } else {
+              const currentStep = getStepById(currentStepId);
+              const match = currentStep?.branches?.find(branch => normalize(branch.answer) === normalize(userInput));
+
+
+              if (match) {
+                if (match.response) terminalOutput.innerHTML += `<div>${match.response}</div>`;
+                if (match.next) {
+                  currentStepId = match.next;
+                  const nextStep = getStepById(currentStepId);
+                  if (nextStep?.response) {
+                    terminalOutput.innerHTML += `<div>${nextStep.response}</div>`;
+                  }
+                  updateHint();
+                }
+              } else {
+                terminalOutput.innerHTML += `<div>Неизвестная команда. Попробуйте еще раз.</div>`;
+              }
+            }
+
+            terminalInput.value = '';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          }
+        });
+
+        // Initialize the game
+        updateHint();
+        terminalInput.focus();
+
+        // Show initial step response if exists
+        const initialStep = getStepById(currentStepId);
+        if (initialStep?.response) {
+          terminalOutput.innerHTML += `<div>${initialStep.response}</div>`;
+        }
+    </script>
+</body>
+</html>
